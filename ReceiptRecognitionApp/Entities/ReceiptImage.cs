@@ -11,5 +11,7 @@
         public string ScannedImageName { get; set; }
 
         public byte[] ScannedImage { get; set; }
+
+        public Receipt Receipt { get; set; }
     }
 }

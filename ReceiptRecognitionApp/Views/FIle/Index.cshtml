@@ -1,0 +1,20 @@
+﻿@using ReceiptRecognitionApp.Entities;
+@model List<ReceiptImage>
+
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+    <tr>
+        <td>File id</td>
+        <td>Original file name</td>
+        <td>Scanned file name</td>
+    </tr>
+    </thead>
+    @foreach (var element in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => element.Id)</td>
+            <td>@Html.DisplayFor(m => element.OriginalImageName)</td>
+            <td>@Html.DisplayFor(m => element.ScannedImageName)</td>
+        </tr>
+    }
+</table>
