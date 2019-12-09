@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing.Imaging;
 using System.Drawing;
+using ReceiptRecognitionApp.Models;
 
 namespace ReceiptRecognitionApp.Controllers
 {
@@ -27,9 +28,10 @@ namespace ReceiptRecognitionApp.Controllers
             {
                 await file.OpenReadStream().CopyToAsync(stream);
                 var image = stream.ToArray();
-                byte[] data = GetScannedReceipt(image).Result;
+                
+                var response = GetScannedReceipt(image, file.FileName).Result;
 
-                ByteArrayToImage(data);
+                ByteArrayToImage(response.ScannedFile);
             }
 
             return Ok();
@@ -47,19 +49,22 @@ namespace ReceiptRecognitionApp.Controllers
                 return image;
             }
         }
+              
 
-        public async Task<byte[]> GetScannedReceipt(byte[] image)
+
+        public async Task<DocumentScannResponse> GetScannedReceipt(byte[] image, string fileName)
         {
             using (var client = new HttpClient())
             {
                 using (var content = new MultipartFormDataContent())
                 {
-                    content.Add(new StreamContent(new MemoryStream(image)), "ImageFile", "receipt.jpg");
+                    content.Add(new StreamContent(new MemoryStream(image)), "ImageFile", fileName);
 
                     using (var response = await client.PostAsync("http://localhost:7071/api/documentscanner", content))
                     {
-                        FileExtension = response.Headers.GetValues("file-extension").First().ToString();
-                        var result = await response.Content.ReadAsByteArrayAsync();
+                        var result = new DocumentScannResponse();
+                        result.FileExtension = response.Headers.GetValues("file-extension").First().ToString();
+                        result.ScannedFile = await response.Content.ReadAsByteArrayAsync();
 
                         return result;
                     }
