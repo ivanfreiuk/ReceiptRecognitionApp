@@ -54,8 +54,7 @@ namespace ReceiptRecognitionApp.Controllers
                     ScannedImage = response.ScannedFile
                 };
                 var id = _receiptImageService.Add(receiptImage);
-                TempData["receiptImageId"] = id;
-                return RedirectToAction("Index", "JsonFile", id);
+                return RedirectToAction("Index", "JsonFile", new { id });
             }
         }
         

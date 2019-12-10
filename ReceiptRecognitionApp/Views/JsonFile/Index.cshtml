@@ -1,28 +1,28 @@
 ﻿@model JsonFileViewModel;
-<!DOCTYPE html>
 
-<html>
-<head>
-    <title>Index</title>
-</head>
-<body>
-<div>@Model.ReceiptImage.OriginalImageName</div>
-<img src="data:image;base64,@System.Convert.ToBase64String(Model.ReceiptImage.OriginalImage)" width="150" height="150" alt="" />
-<div>@Model.ReceiptImage.ScannedImageName</div>
-<img src="data:image;base64,@System.Convert.ToBase64String(Model.ReceiptImage.ScannedImage)" width="150" height="150" alt="" />
-</body>
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(Model.ReceiptImage.OriginalImage)"  alt="" />
+        </div>
+        <div class="col-lg-6">
+            <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(Model.ReceiptImage.ScannedImage)" alt="" />
+        </div>
+    </div>
+
+
+
 @if (string.IsNullOrEmpty(Model.Json))
 {
     <div>Json is empty!</div>
-    using(Html.BeginForm("FormJson","JsonFile"))
-     {
-         <input type="submit" value="Create json"/>
-     }
+    using (Html.BeginForm("FormJson", "JsonFile", new { Model.ReceiptImage.Id }))
+    {
+        <input class="btn btn-primary" type="submit" value="Create json" />
+    }
 }
 else
 {
     <div>@Model.Json</div>
 }
-<div>
-</div>
-</html>
+

@@ -16,11 +16,9 @@ namespace ReceiptRecognitionApp.Controllers
             _receiptService = receiptService;
         }
         
-        public IActionResult Index([FromQuery]int id)
+        public IActionResult Index(int id)
         {
-            var receiptImageId = (int)TempData["receiptImageId"];
-            var receiptImage = _receiptImageService.Get(receiptImageId);
-            TempData["receiptImageId"] = receiptImageId;
+            var receiptImage = _receiptImageService.Get(id);
             return View(new JsonFileViewModel
             {
                 ReceiptImage = receiptImage
@@ -30,9 +28,7 @@ namespace ReceiptRecognitionApp.Controllers
         public IActionResult FormJson(int id)
         {
             var json = "Json";
-            var receiptImageId = (int)TempData["receiptImageId"];
-            var receiptImage = _receiptImageService.Get(receiptImageId);
-            TempData["receiptImageId"] = receiptImageId;
+            var receiptImage = _receiptImageService.Get(id);
             var data = new JsonFileViewModel
             {
                 ReceiptImage = receiptImage,
