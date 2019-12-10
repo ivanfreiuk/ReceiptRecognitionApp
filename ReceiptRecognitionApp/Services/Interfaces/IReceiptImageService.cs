@@ -6,6 +6,7 @@ namespace ReceiptRecognitionApp.Services.Interfaces
     public interface IReceiptImageService
     {
         List<ReceiptImage> GetAll();
-        void Add(ReceiptImage receiptImage);
+        int Add(ReceiptImage receiptImage);
+        ReceiptImage Get(int id);
     }
 }

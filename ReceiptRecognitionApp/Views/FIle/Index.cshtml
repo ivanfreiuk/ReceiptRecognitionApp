@@ -3,18 +3,42 @@
 
 <table class="table table-bordered table-responsive table-hover">
     <thead>
-    <tr>
-        <td>File id</td>
-        <td>Original file name</td>
-        <td>Scanned file name</td>
-    </tr>
+        <tr>
+            <td>File id</td>
+            <td>Original file name</td>
+            <td>Scanned file name</td>
+        </tr>
     </thead>
     @foreach (var element in Model)
     {
         <tr>
             <td>@Html.DisplayFor(m => element.Id)</td>
-            <td>@Html.DisplayFor(m => element.OriginalImageName)</td>
-            <td>@Html.DisplayFor(m => element.ScannedImageName)</td>
+            <td>
+                <button type="button" class="p-0" data-toggle="modal" data-target=".bd-example-modal-lg">
+                <img class="img-fluid zoomable" style="height: 150px;" src="data:image;base64,@System.Convert.ToBase64String(element.OriginalImage)" />
+                </button>
+
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <img class="img-fluid zoomable" src="data:image;base64,@System.Convert.ToBase64String(element.OriginalImage)" />
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <button type="button" class="p-0" data-toggle="modal" data-target=".bd-example-modal-lg">
+                    <img class="img-fluid zoomable" style="height: 150px;" src="data:image;base64,@System.Convert.ToBase64String(element.ScannedImage)" />
+                </button>
+
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <img class="img-fluid zoomable" src="data:image;base64,@System.Convert.ToBase64String(element.ScannedImage)" />
+                        </div>
+                    </div>
+                </div>
+            </td>
         </tr>
     }
 </table>

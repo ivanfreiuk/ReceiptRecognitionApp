@@ -1,0 +1,28 @@
+﻿@model JsonFileViewModel;
+
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(Model.ReceiptImage.OriginalImage)"  alt="" />
+        </div>
+        <div class="col-lg-6">
+            <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(Model.ReceiptImage.ScannedImage)" alt="" />
+        </div>
+    </div>
+
+
+
+@if (string.IsNullOrEmpty(Model.Json))
+{
+    <div>Json is empty!</div>
+    using (Html.BeginForm("FormJson", "JsonFile", new { Model.ReceiptImage.Id }))
+    {
+        <input class="btn btn-primary" type="submit" value="Create json" />
+    }
+}
+else
+{
+    <div>@Model.Json</div>
+}
+

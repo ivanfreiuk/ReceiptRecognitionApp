@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ReceiptRecognitionApp.Entities;
 using ReceiptRecognitionApp.Models;
 
 namespace ReceiptRecognitionApp.Controllers
@@ -18,6 +19,11 @@ namespace ReceiptRecognitionApp.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult NewReceipt(ReceiptImage model)
+        {
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

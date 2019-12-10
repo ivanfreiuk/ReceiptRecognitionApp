@@ -1,4 +1,8 @@
-﻿namespace ReceiptRecognitionApp.Entities
+﻿using System;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+
+namespace ReceiptRecognitionApp.Entities
 {
     public class ReceiptImage
     {
@@ -12,6 +16,8 @@
 
         public byte[] ScannedImage { get; set; }
 
+        [JsonIgnore]
+        [IgnoreDataMember]
         public Receipt Receipt { get; set; }
     }
 }
