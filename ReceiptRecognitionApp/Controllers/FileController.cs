@@ -5,8 +5,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing.Imaging;
-using System.Drawing;
 using ReceiptRecognitionApp.Entities;
 using ReceiptRecognitionApp.Models;
 using ReceiptRecognitionApp.Services.Interfaces;
@@ -21,9 +19,7 @@ namespace ReceiptRecognitionApp.Controllers
         {
             _receiptImageService = receiptImageService;
         }
-
-        public string FileExtension { get; set; }
-
+        
         public IActionResult Index()
         {
             var images = _receiptImageService.GetAll();
@@ -45,7 +41,8 @@ namespace ReceiptRecognitionApp.Controllers
                 /*Comment next variable if you uncomment code above*/
                 var response = new DocumentScannResponse
                 {
-                    FileExtension = ".png"
+                    FileExtension = ".png",
+                    ScannedFile = image
                 };
 
                 var receiptImage = new ReceiptImage
@@ -55,23 +52,9 @@ namespace ReceiptRecognitionApp.Controllers
                     ScannedImageName = string.Concat(Guid.NewGuid().ToString("N").Substring(0, 5), response.FileExtension),
                     ScannedImage = response.ScannedFile
                 };
-
-                _receiptImageService.Add(receiptImage);
-
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
-        
-        public Image ByteArrayToImage(byte[] content)
-        {
-            using (var stream = new MemoryStream(content))
-            {
-                var image = Image.FromStream(stream);
-                var fileName = $"{Guid.NewGuid().ToString()}{FileExtension}";
-                var filePath = $"C:\\Users\\Ivan_Freiuk\\Desktop\\scanned\\{fileName}";
-                image.Save(filePath, ImageFormat.Jpeg);
-                return image;
+                var id = _receiptImageService.Add(receiptImage);
+                TempData["receiptImageId"] = id;
+                return RedirectToAction("Index", "JsonFile", id);
             }
         }
         

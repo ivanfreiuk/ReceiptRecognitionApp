@@ -34,6 +34,7 @@ namespace ReceiptRecognitionApp
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<DbContext, DataContext>();
             services.AddTransient<IReceiptImageService, ReceiptImageService>();
+            services.AddTransient<IReceiptService, ReceiptService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

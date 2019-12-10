@@ -20,10 +20,16 @@ namespace ReceiptRecognitionApp.Services
             return _context.Set<ReceiptImage>().ToList();
         }
 
-        public void Add(ReceiptImage receiptImage)
+        public int Add(ReceiptImage receiptImage)
         {
-            _context.Set<ReceiptImage>().Add(receiptImage);
+            var result = _context.Set<ReceiptImage>().Add(receiptImage);
             _context.SaveChanges();
+            return result.Entity.Id;
+        }
+
+        public ReceiptImage Get(int id)
+        {
+            return _context.Set<ReceiptImage>().Find(id);
         }
     }
 }
