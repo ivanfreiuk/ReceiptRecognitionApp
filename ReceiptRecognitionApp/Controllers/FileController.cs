@@ -33,6 +33,7 @@ namespace ReceiptRecognitionApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Upload(IFormFile file)
         {
+            ReceiptImage receiptImage;
             using (var stream = new MemoryStream())
             {
                 await file.OpenReadStream().CopyToAsync(stream);
@@ -48,7 +49,7 @@ namespace ReceiptRecognitionApp.Controllers
                     FileExtension = ".png"
                 };
 
-                var receiptImage = new ReceiptImage
+                 receiptImage = new ReceiptImage
                 {
                     OriginalImageName = file.FileName,
                     OriginalImage = image,
@@ -60,7 +61,7 @@ namespace ReceiptRecognitionApp.Controllers
 
             }
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("NewReceipt", "Home", receiptImage);
         }
         
         public Image ByteArrayToImage(byte[] content)
