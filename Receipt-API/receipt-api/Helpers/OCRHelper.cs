@@ -16,8 +16,8 @@ namespace receipt_api.Helpers
         {
             using (var client = new HttpClient())
             {
-                string apikey = Secrets.ApiKey;
-                string uri = Secrets.ApiendpointOcr;
+                string apikey = Constants.ApiKey;
+                string uri = Constants.ApiendpointOcr;
 
                 // Request headers.
                 client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", apikey);
@@ -50,7 +50,7 @@ namespace receipt_api.Helpers
         public async Task<OCRVisionResponse> GetOperationResult(string apiUri)
         {
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Secrets.ApiKey);
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", Constants.ApiKey);
             var result = await client.GetAsync(requestUri: apiUri);
 
             // Deserialize OCR response to our model and return
@@ -139,7 +139,8 @@ namespace receipt_api.Helpers
                 }
             }
 
-            receipt.Language = "UK";
+            receipt.Language = "ENG";
+            receipt.Currency = "USD";
             if (abn != string.Empty) { receipt.ABN = abn; }
             if (receiptdate != new DateTime(1900, 01, 01)) { receipt.ReceiptDate = receiptdate.ToString("dd-MMM-yyyy"); }
             if (receipttotal != 0) { receipt.ReceiptTotal = receipttotal.ToString(); }

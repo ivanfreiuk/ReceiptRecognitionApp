@@ -8,6 +8,8 @@ namespace receipt_api
 
         public string ABN { get; set; }
 
+        public string Currency { get; set; }
+
         public string Businessname { get; set; }
 
         public string ReceiptDate { get; set; }
