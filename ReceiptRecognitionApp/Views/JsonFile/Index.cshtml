@@ -2,16 +2,16 @@
 
 
 
-    <div class="row">
-        <div class="col-lg-6">
-            <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(Model.ReceiptImage.OriginalImage)"  alt="" />
-        </div>
-        <div class="col-lg-6">
-            <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(Model.ReceiptImage.ScannedImage)" alt="" />
-        </div>
+<div class="row">
+    <div class="col-lg-6">
+        <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(Model.ReceiptImage.OriginalImage)" alt="" />
     </div>
+    <div class="col-lg-6">
+        <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(Model.ReceiptImage.ScannedImage)" alt="" />
+    </div>
+</div>
 
-@if(Model.Receipt == null || Model.Receipt.ReceiptImageId == 0)
+@if (Model.Receipt == null || Model.Receipt.ReceiptImageId == 0)
 {
     <div>Json is empty!</div>
     using (Html.BeginForm("FormJson", "JsonFile", new { Model.ReceiptImage.Id }))
@@ -24,6 +24,6 @@ else
     <div>@Model.Receipt.ReceiptDate</div>
     <div>@Model.Receipt.ReceiptTotal</div>
     <div>@Model.Receipt.Text</div>
-    <div>@Model.Receipt.Json</div>
+    <div id="json">@Model.Receipt.Json</div>
 }
 

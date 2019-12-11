@@ -21,3 +21,8 @@ $(document).ready(function () {
     });
 });
 
+$('.zoom-btn').click(function () {
+    $('#myModel').empty();
+    $('#myModel').append($(this).children('img').eq(0).clone())
+    $('#myModel img').css('height', 'auto');
+});

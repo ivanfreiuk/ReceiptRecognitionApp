@@ -36,7 +36,8 @@ namespace ReceiptRecognitionApp.Controllers
                     ReceiptDate = receipt.ReceiptDate,
                     ReceiptTotal = receipt.ReceiptTotal,
                     ReceiptImageId = id,
-                    Text = receipt.Text
+                    Text = receipt.Text,
+                    Json = receipt.Json,
                 }
             });
         }
