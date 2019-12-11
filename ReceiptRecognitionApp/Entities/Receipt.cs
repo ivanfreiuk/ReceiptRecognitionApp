@@ -12,6 +12,12 @@ namespace ReceiptRecognitionApp.Entities
 
         public string Json { get; set; }
 
+        public string ReceiptDate { get; set; }
+
+        public string ReceiptTotal { get; set; }
+
+        public string Text { get; set; }
+
         [JsonIgnore]
         [IgnoreDataMember]
         public ReceiptImage ReceiptImage { get; set; }

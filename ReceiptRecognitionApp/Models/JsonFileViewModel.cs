@@ -6,5 +6,6 @@ namespace ReceiptRecognitionApp.Models
     {
         public ReceiptImage ReceiptImage { get; set; }
         public string Json { get; set; }
+        public Receipt Receipt { get; set; }
     }
 }

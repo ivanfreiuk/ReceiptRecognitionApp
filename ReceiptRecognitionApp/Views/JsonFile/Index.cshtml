@@ -11,9 +11,7 @@
         </div>
     </div>
 
-
-
-@if (string.IsNullOrEmpty(Model.Json))
+@if(Model.Receipt == null || Model.Receipt.ReceiptImageId == 0)
 {
     <div>Json is empty!</div>
     using (Html.BeginForm("FormJson", "JsonFile", new { Model.ReceiptImage.Id }))
@@ -23,6 +21,9 @@
 }
 else
 {
-    <div>@Model.Json</div>
+    <div>@Model.Receipt.ReceiptDate</div>
+    <div>@Model.Receipt.ReceiptTotal</div>
+    <div>@Model.Receipt.Text</div>
+    <div>@Model.Receipt.Json</div>
 }
 
