@@ -19,6 +19,9 @@ $(document).ready(function () {
             reader.readAsDataURL(input.files[0]);
         }
     });
+
+    var myJSON = $('#json').text().replace(/\,/g, ',<br />').replace(/\{/g, '{<br />').replace(/\}/g, '<br />}');
+    document.getElementById("showjson").innerHTML = myJSON;
 });
 
 $('.zoom-btn').click(function () {
@@ -26,3 +29,4 @@ $('.zoom-btn').click(function () {
     $('#myModel').append($(this).children('img').eq(0).clone())
     $('#myModel img').css('height', 'auto');
 });
+

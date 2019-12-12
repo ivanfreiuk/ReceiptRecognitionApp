@@ -7,36 +7,41 @@
             <td>File id</td>
             <td>Original file name</td>
             <td>Scanned file name</td>
+            <td>Total</td>
+            <td>Date</td>
+
         </tr>
     </thead>
     @foreach (var element in Model)
     {
-        <tr>
-            <td class="position-relative">
-                @using (Html.BeginForm("Index", "JsonFile", new { element.Id }))
-                {
-                    <button type="submit" class="p-0 w-100 h-100 position-absolute" style="top: 0; left:0;">@Html.DisplayFor(m => element.Id) </button>
-                }
-            </td>
-            <td>
-                <button type="button" class="p-0 zoom-btn" data-toggle="modal" data-target=".bd-example-modal-lg">
-                    <img class="img-fluid zoomable" style="height: 150px;" src="data:image;base64,@System.Convert.ToBase64String(element.OriginalImage)" />
-                </button>
-            </td>
-            <td>
-                <button type="button" class="p-0 zoom-btn" data-toggle="modal" data-target=".bd-example-modal-lg">
-                    <img class="img-fluid zoomable"  style="height: 150px;" src="data:image;base64,@System.Convert.ToBase64String(element.ScannedImage)" />
-                </button>
+<tr>
+    <td class="position-relative">
+        @using (Html.BeginForm("Index", "JsonFile", new { element.Id }))
+        {
+            <button type="submit" class="p-0 w-100 h-100 position-absolute" style="top: 0; left:0;">@Html.DisplayFor(m => element.Id) </button>
+        }
+    </td>
+    <td>
+        <button type="button" class="p-0 zoom-btn" data-toggle="modal" data-target=".bd-example-modal-lg">
+            <img class="img-fluid zoomable" style="height: 150px;" src="data:image;base64,@System.Convert.ToBase64String(element.OriginalImage)" />
+        </button>
+    </td>
+    <td>
+        <button type="button" class="p-0 zoom-btn" data-toggle="modal" data-target=".bd-example-modal-lg">
+            <img class="img-fluid zoomable" style="height: 150px;" src="data:image;base64,@System.Convert.ToBase64String(element.ScannedImage)" />
+        </button>
 
-                @*<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabe2" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <img class="img-fluid zoomable" src="data:image;base64,@System.Convert.ToBase64String(element.ScannedImage)" />
-                        </div>
+        @*<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabe2" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <img class="img-fluid zoomable" src="data:image;base64,@System.Convert.ToBase64String(element.ScannedImage)" />
                     </div>
-                </div>*@
-            </td>
-        </tr>
+                </div>
+            </div>*@
+    </td>
+    <td>@Html.DisplayFor(m => element.Receipt.ReceiptTotal)</td>
+    <td>@Html.DisplayFor(m => element.Receipt.ReceiptDate)</td>
+</tr>
     }
 </table>
 
