@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ReceiptRecognitionApp.Entities;
 using ReceiptRecognitionApp.Services.Interfaces;
@@ -18,6 +19,10 @@ namespace ReceiptRecognitionApp.Services
         {
             _context.Set<Receipt>().Add(receipt);
             _context.SaveChanges();
+        }
+        public List<Receipt> GetAll()
+        {
+            return _context.Set<Receipt>().Include(t => t.ReceiptImage).ToList();
         }
 
         public Receipt FirstOrDefault(int receiptImageId)

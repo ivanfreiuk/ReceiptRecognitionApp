@@ -1,4 +1,5 @@
 ﻿using ReceiptRecognitionApp.Entities;
+using System.Collections.Generic;
 
 namespace ReceiptRecognitionApp.Services.Interfaces
 {
@@ -6,5 +7,6 @@ namespace ReceiptRecognitionApp.Services.Interfaces
     {
         void Add(Receipt receipt);
         Receipt FirstOrDefault(int receiptImageId);
+        List<Receipt> GetAll();
     }
 }

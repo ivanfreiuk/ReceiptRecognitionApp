@@ -14,7 +14,10 @@ namespace ReceiptRecognitionApp.Contenxt
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            modelBuilder.Entity<Receipt>()
+              .HasOne(x => x.ReceiptImage)
+              .WithOne(x => x.Receipt)
+              .HasForeignKey<Receipt>(x => x.ReceiptImageId);
             modelBuilder.Entity<ReceiptImage>()
                 .HasOne(x => x.Receipt)
                 .WithOne(x => x.ReceiptImage)

@@ -14,15 +14,17 @@ namespace ReceiptRecognitionApp.Controllers
     public class FileController : Controller
     {
         private readonly IReceiptImageService _receiptImageService;
+        private readonly IReceiptService _receiptService;
 
-        public FileController(IReceiptImageService receiptImageService)
+        public FileController(IReceiptImageService receiptImageService, IReceiptService receiptService)
         {
             _receiptImageService = receiptImageService;
+            _receiptService = receiptService;
         }
         
         public IActionResult Index()
         {
-            var images = _receiptImageService.GetAll();
+            var images = _receiptService.GetAll();
             return View(images);
         }
 

@@ -1,5 +1,5 @@
 ﻿@using ReceiptRecognitionApp.Entities;
-@model List<ReceiptImage>
+@model List<Receipt>
 
 <table class="table table-bordered table-responsive table-hover">
     <thead>
@@ -16,19 +16,19 @@
     {
 <tr>
     <td class="position-relative">
-        @using (Html.BeginForm("Index", "JsonFile", new { element.Id }))
+        @using (Html.BeginForm("Index", "JsonFile", new { element.ReceiptImage.Id }))
         {
-            <button type="submit" class="p-0 w-100 h-100 position-absolute" style="top: 0; left:0;">@Html.DisplayFor(m => element.Id) </button>
+            <button type="submit" class="p-0 w-100 h-100 position-absolute" style="top: 0; left:0;">@Html.DisplayFor(m => element.ReceiptImage.Id) </button>
         }
     </td>
     <td>
         <button type="button" class="p-0 zoom-btn" data-toggle="modal" data-target=".bd-example-modal-lg">
-            <img class="img-fluid zoomable" style="height: 150px;" src="data:image;base64,@System.Convert.ToBase64String(element.OriginalImage)" />
+            <img class="img-fluid zoomable" style="height: 150px;" src="data:image;base64,@System.Convert.ToBase64String(element.ReceiptImage.OriginalImage)" />
         </button>
     </td>
     <td>
         <button type="button" class="p-0 zoom-btn" data-toggle="modal" data-target=".bd-example-modal-lg">
-            <img class="img-fluid zoomable" style="height: 150px;" src="data:image;base64,@System.Convert.ToBase64String(element.ScannedImage)" />
+            <img class="img-fluid zoomable" style="height: 150px;" src="data:image;base64,@System.Convert.ToBase64String(element.ReceiptImage.ScannedImage)" />
         </button>
 
         @*<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabe2" aria-hidden="true">
@@ -39,8 +39,8 @@
                 </div>
             </div>*@
     </td>
-    <td>@Html.DisplayFor(m => element.Receipt.ReceiptTotal)</td>
-    <td>@Html.DisplayFor(m => element.Receipt.ReceiptDate)</td>
+    <td>@Html.DisplayFor(m => element.ReceiptTotal)</td>
+    <td>@Html.DisplayFor(m => element.ReceiptDate)</td>
 </tr>
     }
 </table>
